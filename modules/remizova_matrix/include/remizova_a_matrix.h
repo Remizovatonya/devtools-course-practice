@@ -52,16 +52,16 @@ TMatrix<T>::TMatrix(int _rows, int _cols, T num)
         throw "number of cols is less than 0";
     if (cols < 0)
         throw "number of rows is less than 0";
-    for (int i = 0; i < mtr.size(); i++)
-        for (int j = 0; j < mtr[i].size(); j++)
+    for (size_t i = 0; i < mtr.size(); i++)
+        for (size_t j = 0; j < mtr[i].size(); j++)
             mtr[i][j] = num;
 }
 
 template <class T>
 TMatrix<T>::TMatrix(const TMatrix<T>& m)
     : rows(m.rows), cols(m.cols), mtr(m.rows, std::vector<T>(m.cols)) {
-    for (int i = 0; i < mtr.size(); i++)
-        for (int j = 0; j < mtr[i].size(); j++)
+    for (size_t i = 0; i < mtr.size(); i++)
+        for (size_t j = 0; j < mtr[i].size(); j++)
             mtr[i][j] = m.mtr[i][j];
 }
 
@@ -72,8 +72,8 @@ template<class T>
 bool TMatrix<T>::operator==(const TMatrix& m) const {
     if (rows != m.rows || cols != m.cols)
         return false;
-    for (int i = 0; i < mtr.size(); i++) {
-        for (int j = 0; j < mtr[i].size(); j++) {
+    for (size_t i = 0; i < mtr.size(); i++) {
+        for (size_t j = 0; j < mtr[i].size(); j++) {
             if (mtr[i][j] != m.mtr[i][j])
                 return false;
         }
@@ -85,8 +85,8 @@ template<class T>
 bool TMatrix<T>::operator!=(const TMatrix& m) const {
     if (rows != m.rows || cols != m.cols)
         return true;
-    for (int i = 0; i < mtr.size(); i++) {
-        for (int j = 0; j < mtr[i].size(); j++) {
+    for (size_t i = 0; i < mtr.size(); i++) {
+        for (size_t j = 0; j < mtr[i].size(); j++) {
             if (mtr[i][j] != m.mtr[i][j])
                 return true;
         }
@@ -101,13 +101,13 @@ TMatrix<T>& TMatrix<T>::operator=(const TMatrix<T>& m) {
     if (rows != m.rows || cols != m.cols) {
         std::vector<std::vector<T>>().swap(mtr);
         mtr.resize(m.rows);
-        for (int i = 0; i < mtr.size(); i++)
+        for (size_t i = 0; i < mtr.size(); i++)
             mtr[i].resize(m.cols);
         rows = m.rows;
         cols = m.cols;
     }
-    for (int i = 0; i < mtr.size(); i++)
-        for (int j = 0; j < mtr[i].size(); j++)
+    for (size_t i = 0; i < mtr.size(); i++)
+        for (size_t j = 0; j < mtr[i].size(); j++)
             mtr[i][j] = m.mtr[i][j];
     return *this;
 }
@@ -117,8 +117,8 @@ TMatrix<T> TMatrix<T>::operator+(const TMatrix<T>& m) {
     if (rows != m.rows || cols != m.cols)
         throw "matrices are not equal";
     TMatrix tmp(rows, cols);
-    for (int i = 0; i < mtr.size(); i++)
-        for (int j = 0; j < mtr[i].size(); j++)
+    for (size_t i = 0; i < mtr.size(); i++)
+        for (size_t j = 0; j < mtr[i].size(); j++)
             tmp.mtr[i][j] = mtr[i][j] + m.mtr[i][j];
     return tmp;
 }
@@ -128,8 +128,8 @@ TMatrix<T> TMatrix<T>::operator-(const TMatrix<T>& m) {
     if (rows != m.rows || cols != m.cols)
         throw "matrices are not equal";
     TMatrix tmp(m.rows, m.cols);
-    for (int i = 0; i < mtr.size(); i++)
-        for (int j = 0; j < mtr[i].size(); j++)
+    for (size_t i = 0; i < mtr.size(); i++)
+        for (size_t j = 0; j < mtr[i].size(); j++)
             tmp.mtr[i][j] = mtr[i][j] - m.mtr[i][j];
     return tmp;
 }
@@ -139,10 +139,10 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& m) {
     if (cols != m.rows)
         throw "matrices cannot be multiplied";
     TMatrix tmp(rows, m.cols);
-    for (int i = 0; i < rows; i++)
-        for (int j = 0; j < m.cols; j++) {
+    for (size_t i = 0; i < tmp.mtr.size(); i++)
+        for (size_t j = 0; j < tmp.mtr[i].size(); j++) {
             tmp.mtr[i][j] = 0;
-            for (int k = 0; k < cols; k++)
+            for (size_t k = 0; k < mtr[i].size(); k++)
                 tmp.mtr[i][j] += mtr[i][k] * m.mtr[k][j];
         }
     return tmp;
@@ -159,10 +159,10 @@ TMatrix<T> TMatrix<T>::operator/(const TMatrix<T>& m) {
 
 template<class T>
 void TMatrix<T>::setMatrix(const std::vector<std::vector<T>>& vec) {
-    if (vec.size() != rows || vec[0].size() != cols)
+    if (vec.size() != mtr.size() || vec[0].size() != mtr[0].size())
         throw "matrix cannot be specified";
-    for (int i = 0; i < mtr.size(); i++)
-        for (int j = 0; j < mtr[i].size(); j++)
+    for (size_t i = 0; i < mtr.size(); i++)
+        for (size_t j = 0; j < mtr[i].size(); j++)
             mtr[i][j] = vec[i][j];
 }
 
@@ -175,12 +175,12 @@ TMatrix<T> TMatrix<T>::matrixWithoutRowAndCol(int delRow, int delCol) {
     int offsetCol;
     TMatrix tmp(rows - 1, cols - 1);
     offsetRow = 0;
-    for (int i = 0; i < tmp.mtr.size(); i++) {
+    for (size_t i = 0; i < tmp.mtr.size(); i++) {
         if (i == delRow) {
             offsetRow = 1;
         }
         offsetCol = 0;
-        for (int j = 0; j < tmp.mtr[i].size(); j++) {
+        for (size_t j = 0; j < tmp.mtr[i].size(); j++) {
             if (j == delCol) {
                 offsetCol = 1;
             }
@@ -206,7 +206,7 @@ int TMatrix<T>::determinant(TMatrix<T> m) {
 
     TMatrix tmp(m.rows - 1, m.cols - 1);
 
-    for (int j = 0; j < m.rows; j++) {
+    for (size_t j = 0; j < m.mtr.size(); j++) {
         tmp = m.matrixWithoutRowAndCol(0, j);
         det += degree * m.mtr[0][j] * determinant(tmp);
         degree = -degree;
@@ -218,8 +218,8 @@ int TMatrix<T>::determinant(TMatrix<T> m) {
 template<class T>
 TMatrix<T> TMatrix<T>::transposition() {
     TMatrix trans(cols, rows);
-    for (int i = 0; i < mtr.size(); i++)
-        for (int j = 0; j < mtr[i].size(); j++)
+    for (size_t i = 0; i < mtr.size(); i++)
+        for (size_t j = 0; j < mtr[i].size(); j++)
             trans.mtr[j][i] = mtr[i][j];
     return trans;
 }
@@ -232,8 +232,8 @@ TMatrix<T> TMatrix<T>::alliance() {
     TMatrix tmp(rows, cols);
     int fact = -1;
 
-    for (int i = 0; i < trans.mtr.size(); i++)
-        for (int j = 0; j < trans.mtr[i].size(); j++) {
+    for (size_t i = 0; i < trans.mtr.size(); i++)
+        for (size_t j = 0; j < trans.mtr[i].size(); j++) {
             tmp = trans.matrixWithoutRowAndCol(i, j);
             all.mtr[i][j] = pow(fact, i + j) * tmp.determinant(tmp);
         }
@@ -249,8 +249,8 @@ TMatrix<T> TMatrix<T>::reverse() {
         throw "matrix is degenerate";
     TMatrix all = alliance();
     TMatrix rev(rows, cols);
-    for (int i = 0; i < mtr.size(); i++)
-        for (int j = 0; j < mtr[i].size(); j++)
+    for (size_t i = 0; i < mtr.size(); i++)
+        for (size_t j = 0; j < mtr[i].size(); j++)
             rev.mtr[i][j] = all.mtr[i][j] / determinant(*this);
     return rev;
 }
