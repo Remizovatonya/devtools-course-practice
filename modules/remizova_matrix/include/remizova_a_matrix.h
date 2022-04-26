@@ -37,7 +37,7 @@ class TMatrix {
 };
 
 template <class T>
-inline TMatrix<T>::TMatrix(int _rows, int _cols)
+TMatrix<T>::TMatrix(int _rows, int _cols)
     : rows(_rows), cols(_cols), mtr(_rows, std::vector<T>(_cols)) {
     if (rows < 0)
         throw "number of cols is less than 0";
@@ -46,7 +46,7 @@ inline TMatrix<T>::TMatrix(int _rows, int _cols)
 }
 
 template <class T>
-inline TMatrix<T>::TMatrix(int _rows, int _cols, T num)
+TMatrix<T>::TMatrix(int _rows, int _cols, T num)
     : rows(_rows), cols(_cols), mtr(_rows, std::vector<T>(_cols)) {
     if (rows < 0)
         throw "number of cols is less than 0";
@@ -58,7 +58,7 @@ inline TMatrix<T>::TMatrix(int _rows, int _cols, T num)
 }
 
 template <class T>
-inline TMatrix<T>::TMatrix(const TMatrix<T>& m)
+TMatrix<T>::TMatrix(const TMatrix<T>& m)
     : rows(m.rows), cols(m.cols), mtr(m.rows, std::vector<T>(m.cols)) {
     for (int i = 0; i < mtr.size(); i++)
         for (int j = 0; j < mtr[i].size(); j++)
@@ -66,7 +66,7 @@ inline TMatrix<T>::TMatrix(const TMatrix<T>& m)
 }
 
 template <class T>
-inline TMatrix<T>::~TMatrix() { }
+TMatrix<T>::~TMatrix() { }
 
 template<class T>
 bool TMatrix<T>::operator==(const TMatrix& m) const {
@@ -95,7 +95,7 @@ bool TMatrix<T>::operator!=(const TMatrix& m) const {
 }
 
 template<class T>
-inline TMatrix<T>& TMatrix<T>::operator=(const TMatrix<T>& m) {
+TMatrix<T>& TMatrix<T>::operator=(const TMatrix<T>& m) {
     if (this == &m)
         return *this;
     if (rows != m.rows || cols != m.cols) {
@@ -113,7 +113,7 @@ inline TMatrix<T>& TMatrix<T>::operator=(const TMatrix<T>& m) {
 }
 
 template<class T>
-inline TMatrix<T> TMatrix<T>::operator+(const TMatrix<T>& m) {
+TMatrix<T> TMatrix<T>::operator+(const TMatrix<T>& m) {
     if (rows != m.rows || cols != m.cols)
         throw "matrices are not equal";
     TMatrix tmp(rows, cols);
@@ -124,7 +124,7 @@ inline TMatrix<T> TMatrix<T>::operator+(const TMatrix<T>& m) {
 }
 
 template<class T>
-inline TMatrix<T> TMatrix<T>::operator-(const TMatrix<T>& m) {
+TMatrix<T> TMatrix<T>::operator-(const TMatrix<T>& m) {
     if (rows != m.rows || cols != m.cols)
         throw "matrices are not equal";
     TMatrix tmp(m.rows, m.cols);
@@ -135,7 +135,7 @@ inline TMatrix<T> TMatrix<T>::operator-(const TMatrix<T>& m) {
 }
 
 template<class T>
-inline TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& m) {
+TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& m) {
     if (cols != m.rows)
         throw "matrices cannot be multiplied";
     TMatrix tmp(rows, m.cols);
@@ -149,7 +149,7 @@ inline TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& m) {
 }
 
 template<class T>
-inline TMatrix<T> TMatrix<T>::operator/(const TMatrix<T>& m) {
+TMatrix<T> TMatrix<T>::operator/(const TMatrix<T>& m) {
     if (m.cols != m.rows)
         throw "matrix 2 is not square";
     TMatrix tmp(rows, m.cols);
