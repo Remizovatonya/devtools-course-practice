@@ -192,7 +192,7 @@ TEST(TMatrix, cannot_find_reverse_not_square_matrix) {
 
 TEST(TMatrix, cannot_find_reverse_matrix_with_null_determinant) {
     TMatrix<double> m(3, 3);
-    std::vector<std::vector<double>> v{ {0.5, 0, -1}, {1, 0, 2}, {2.3, 0, 17} }; // det = 0
+    std::vector<std::vector<double>> v{ {0.5, 0, -1}, {1, 0, 2}, {2.3, 0, 17} };  // det = 0
     m.setMatrix(v);
 
     ASSERT_ANY_THROW(m.reverse());

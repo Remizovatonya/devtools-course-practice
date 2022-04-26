@@ -25,12 +25,12 @@ class TMatrix {
     TMatrix<T> operator + (const TMatrix<T>& m);
     TMatrix<T> operator - (const TMatrix<T>& m);
     TMatrix<T> operator * (const TMatrix<T>& m);
-    TMatrix<T> operator / (TMatrix<T>& m);
-   
+    TMatrix<T> operator / (const TMatrix<T>& m);
+
     void setMatrix(const std::vector<std::vector<T>>& vec);
     std::vector<std::vector<T>> getMatrix();
     TMatrix<T> matrixWithoutRowAndCol(int delRow, int delCol);
-    int determinant(TMatrix<T>& m);
+    int determinant(TMatrix<T> m);
     TMatrix<T> transposition();
     TMatrix<T> alliance();
     TMatrix<T> reverse();
@@ -149,7 +149,7 @@ inline TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& m) {
 }
 
 template<class T>
-inline TMatrix<T> TMatrix<T>::operator/(TMatrix<T>& m) {
+inline TMatrix<T> TMatrix<T>::operator/(const TMatrix<T>& m) {
     if (m.cols != m.rows)
         throw "matrix 2 is not square";
     TMatrix tmp(rows, m.cols);
@@ -191,12 +191,12 @@ TMatrix<T> TMatrix<T>::matrixWithoutRowAndCol(int delRow, int delCol) {
 }
 
 template<class T>
-int TMatrix<T>::determinant(TMatrix<T>& m) {
+int TMatrix<T>::determinant(TMatrix<T> m) {
     if (m.cols != m.rows)
         throw "matrix is not square";
 
-    int det = 0; // determinant
-    int degree = 1; // mult
+    int det = 0;  // determinant
+    int degree = 1;  // mult
 
     if (m.cols == 1)
         return m.mtr[0][0];
