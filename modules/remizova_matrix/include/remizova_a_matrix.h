@@ -175,12 +175,12 @@ TMatrix<T> TMatrix<T>::matrixWithoutRowAndCol(int delRow, int delCol) {
     int offsetCol;
     TMatrix tmp(rows - 1, cols - 1);
     offsetRow = 0;
-    for (size_t i = 0; i < tmp.mtr.size(); i++) {
+    for (int i = 0; i < rows - 1; i++) {
         if (i == delRow) {
             offsetRow = 1;
         }
         offsetCol = 0;
-        for (size_t j = 0; j < tmp.mtr[i].size(); j++) {
+        for (int j = 0; j < cols - 1; j++) {
             if (j == delCol) {
                 offsetCol = 1;
             }
