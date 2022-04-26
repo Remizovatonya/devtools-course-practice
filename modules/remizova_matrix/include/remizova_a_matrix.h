@@ -30,10 +30,10 @@ class TMatrix {
     void setMatrix(const std::vector<std::vector<T>>& vec);
     std::vector<std::vector<T>> getMatrix();
     TMatrix<T> matrixWithoutRowAndCol(int delRow, int delCol);
-    int determinant(TMatrix<T> m);
-    TMatrix<T> transposition();
-    TMatrix<T> alliance();
-    TMatrix<T> reverse();
+    int determinant(TMatrix<T> m) const;
+    TMatrix<T> transposition() const;
+    TMatrix<T> alliance() const;
+    TMatrix<T> reverse() const;
 };
 
 template <class T>
@@ -191,7 +191,7 @@ TMatrix<T> TMatrix<T>::matrixWithoutRowAndCol(int delRow, int delCol) {
 }
 
 template<class T>
-int TMatrix<T>::determinant(TMatrix<T> m) {
+int TMatrix<T>::determinant(TMatrix<T> m) const {
     if (m.cols != m.rows)
         throw "matrix is not square";
 
@@ -216,7 +216,7 @@ int TMatrix<T>::determinant(TMatrix<T> m) {
 }
 
 template<class T>
-TMatrix<T> TMatrix<T>::transposition() {
+TMatrix<T> TMatrix<T>::transposition() const {
     TMatrix trans(cols, rows);
     for (size_t i = 0; i < mtr.size(); i++)
         for (size_t j = 0; j < mtr[i].size(); j++)
@@ -225,7 +225,7 @@ TMatrix<T> TMatrix<T>::transposition() {
 }
 
 template<class T>
-TMatrix<T> TMatrix<T>::alliance() {
+TMatrix<T> TMatrix<T>::alliance() const {
     TMatrix all(rows, cols);
     TMatrix trans(rows, cols);
     trans = transposition();
@@ -242,7 +242,7 @@ TMatrix<T> TMatrix<T>::alliance() {
 }
 
 template<class T>
-TMatrix<T> TMatrix<T>::reverse() {
+TMatrix<T> TMatrix<T>::reverse() const {
     if (cols != rows)
         throw "matrix is not square";
     if (determinant(*this) == 0)

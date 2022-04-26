@@ -119,6 +119,17 @@ TEST(TMatrix, can_multiply_matrix_with_cols1_equal_rows2) {
     ASSERT_NO_THROW(m1 * m2);
 }
 
+TEST(TMatrix, can_divide_matrices_with_square_second_matrix) {
+    TMatrix<double> m1(2, 2);
+    std::vector<std::vector<double>> v1{ {1, 2}, {4, 5} };
+    m1.setMatrix(v1);
+    TMatrix<double> m2(2, 2);
+    std::vector<std::vector<double>> v2{ {1, 4}, {3, 6} };
+    m2.setMatrix(v2);
+
+    ASSERT_NO_THROW(m1 / m2);
+}
+
 TEST(TMatrix, can_delete_row_and_col) {
     TMatrix<int> m1(3, 3);
     std::vector<std::vector<int>> v1{ {-2, 3, 4}, {5, 1, -7}, {8, 0, 9} };
@@ -133,7 +144,27 @@ TEST(TMatrix, can_delete_row_and_col) {
     EXPECT_EQ(m2, m1);
 }
 
-TEST(TMatrix, can_find_determinant_square_matrix) {
+TEST(TMatrix, can_find_determinant_square_matrix_1x1) {
+    TMatrix<int> m(1, 1, 17);
+
+    int det_1 = 17;
+    int det_2 = m.determinant(m);
+
+    EXPECT_EQ(det_1, det_2);
+}
+
+TEST(TMatrix, can_find_determinant_square_matrix_2x2) {
+    TMatrix<int> m(2, 2);
+    std::vector<std::vector<int>> v{ {3, -7}, {4, 2} };
+    m.setMatrix(v);
+
+    int det_1 = 34;
+    int det_2 = m.determinant(m);
+
+    EXPECT_EQ(det_1, det_2);
+}
+
+TEST(TMatrix, can_find_determinant_square_matrix_3x3) {
     TMatrix<int> m(3, 3);
     std::vector<std::vector<int>> v{ {-2, 3, 4}, {5, 1, -7}, {8, 0, 9} };
     m.setMatrix(v);
