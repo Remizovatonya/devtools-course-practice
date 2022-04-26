@@ -165,7 +165,7 @@ TEST(TMatrix, can_convert_matrix_to_alliance) {
     std::vector<std::vector<int>> v1{ {2, 6, 5}, {-1, 9, 8}, {8, 0, 2} };
     m1.setMatrix(v1);
     TMatrix<int> m2(3, 3);
-    std::vector<std::vector<int>> v2{ {18, -12, 3}, 
+    std::vector<std::vector<int>> v2{ {18, -12, 3},
         {66, -36, -21}, {-72, 48, 24} };
     m2.setMatrix(v2);
 
@@ -192,9 +192,9 @@ TEST(TMatrix, cannot_find_reverse_not_square_matrix) {
 }
 
 TEST(TMatrix, cannot_find_reverse_matrix_with_null_determinant) {
-    TMatrix<double> m(3, 3);
-    std::vector<std::vector<double>> v{ {0.5, 0, -1}, 
-        {1, 0, 2}, {2.3, 0, 17} };  // det = 0
+    TMatrix<int> m(3, 3);
+    std::vector<std::vector<int>> v{ {-2, 7, -3},
+        {4, -14, 6}, {-3, 7, 13} };  // det = 0
     m.setMatrix(v);
 
     ASSERT_ANY_THROW(m.reverse());
