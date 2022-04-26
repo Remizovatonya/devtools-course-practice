@@ -2,6 +2,7 @@
 
 #include <gtest/gtest.h>
 #include "include/remizova_a_matrix.h"
+#include <vector>
 
 TEST(TMatrix, can_create_int_null_matrix_with_positive_size) {
     ASSERT_NO_THROW(TMatrix<int> m(3, 4));
