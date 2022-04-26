@@ -9,9 +9,9 @@
 
 template <class T>
 class TMatrix {
-    std::vector<std::vector<T> > mtr;
     int rows;
     int cols;
+    std::vector<std::vector<T> > mtr;
 
  public:
     TMatrix(int _rows, int _cols);
