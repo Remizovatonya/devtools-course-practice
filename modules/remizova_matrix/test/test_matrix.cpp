@@ -37,7 +37,7 @@ TEST(TMatrix, can_create_bool_matrix_with_given_value) {
 
 TEST(TMatrix, can_create_copied_int_matrix) {
     TMatrix<int> m1(5, 5, 2);
-    
+
     ASSERT_NO_THROW(TMatrix<int> m2(m1));
 }
 
@@ -165,7 +165,8 @@ TEST(TMatrix, can_convert_matrix_to_alliance) {
     std::vector<std::vector<int>> v1{ {2, 6, 5}, {-1, 9, 8}, {8, 0, 2} };
     m1.setMatrix(v1);
     TMatrix<int> m2(3, 3);
-    std::vector<std::vector<int>> v2{ {18, -12, 3}, {66, -36, -21}, {-72, 48, 24} };
+    std::vector<std::vector<int>> v2{ {18, -12, 3}, 
+        {66, -36, -21}, {-72, 48, 24} };
     m2.setMatrix(v2);
 
     EXPECT_EQ(m1.alliance(), m2);
@@ -192,7 +193,8 @@ TEST(TMatrix, cannot_find_reverse_not_square_matrix) {
 
 TEST(TMatrix, cannot_find_reverse_matrix_with_null_determinant) {
     TMatrix<double> m(3, 3);
-    std::vector<std::vector<double>> v{ {0.5, 0, -1}, {1, 0, 2}, {2.3, 0, 17} };  // det = 0
+    std::vector<std::vector<double>> v{ {0.5, 0, -1}, 
+        {1, 0, 2}, {2.3, 0, 17} };  // det = 0
     m.setMatrix(v);
 
     ASSERT_ANY_THROW(m.reverse());
