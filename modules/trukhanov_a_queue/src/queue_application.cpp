@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 QueueApplication::QueueApplication() : message_("") {}
 
@@ -67,6 +68,7 @@ bool QueueApplication::validateNumberOfArguments(int argc, const char** argv) {
         help(argv[0], "ERROR: You need to enter an operation\n\n");
         return false;
     }
+    return true;
 }
 
 double QueueApplication::parseInt(const char* arg) {
