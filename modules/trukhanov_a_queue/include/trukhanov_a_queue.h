@@ -17,7 +17,7 @@ class TQueue {
     ~TQueue();
 
     TQueue<T>& operator = (const TQueue<T>& _v);
-    T operator [] (int i);
+    T operator[] (int i);
 
     void Push(T d);
     T Get();
@@ -80,10 +80,9 @@ TQueue<T>& TQueue<T>::operator =(const TQueue<T>& _v) {
 }
 
 template <class T>
-T TQueue<T>::operator [](int i) {
+T TQueue<T>::operator[](int i) {
     if (i >= length)
         throw "exception";
-    
     return x[i];
 }
 

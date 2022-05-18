@@ -3,9 +3,9 @@
 #ifndef MODULES_TRUKHANOV_A_QUEUE_INCLUDE_QUEUE_APPLICATION_H_
 #define MODULES_TRUKHANOV_A_QUEUE_INCLUDE_QUEUE_APPLICATION_H_
 
-#include "trukhanov_a_queue.h"
 #include <string>
 #include <vector>
+#include "include/trukhanov_a_queue.h"
 
 enum class Operations { push, get, length };
 
