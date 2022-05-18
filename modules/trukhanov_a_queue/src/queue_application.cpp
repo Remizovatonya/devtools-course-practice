@@ -40,17 +40,17 @@ int QueueApplication::findOperation(int argc, const char** argv) {
         it = std::find(dop.begin(), dop.end(), "push");
         return std::distance(dop.begin(), it) + 1;
     }
-        
+
     if (std::find(dop.begin(), dop.end(), "get") != dop.end()) {
         it = std::find(dop.begin(), dop.end(), "get");
         return std::distance(dop.begin(), it) + 1;
     }
-        
+
     if (std::find(dop.begin(), dop.end(), "length") != dop.end()) {
         it = std::find(dop.begin(), dop.end(), "length");
         return std::distance(dop.begin(), it) + 1;
     }
-    
+
     return -1;
 }
 
@@ -58,9 +58,7 @@ bool QueueApplication::validateNumberOfArguments(int argc, const char** argv) {
     if (argc == 1) {
         help(argv[0]);
         return false;
-    }
-
-    else if (argc < 3) {
+    } else if (argc < 3) {
         help(argv[0], "ERROR: Should be at least 3 arguments\n\n");
         return false;
     }
@@ -92,14 +90,11 @@ Operations QueueApplication::parseOperation(const char* arg) {
 
     if (strcmp(arg, "push") == 0) {
         operation = Operations::push;
-    }
-    else if (strcmp(arg, "get") == 0) {
+    } else if (strcmp(arg, "get") == 0) {
         operation = Operations::get;
-    }
-    else if (strcmp(arg, "length") == 0) {
+    } else if (strcmp(arg, "length") == 0) {
         operation = Operations::length;
-    }
-    else {
+    } else {
         throw std::string("ERROR: Wrong operation!");
     }
 
@@ -117,12 +112,11 @@ std::string QueueApplication::operator()(int argc, const char** argv) {
     if (findOperation(argc, argv) == argc - 1) {
         size = argc - 2;
         withOperand = false;
-    }   
-    else if (findOperation(argc, argv) == argc - 2) {
+    } else if (findOperation(argc, argv) == argc - 2) {
         size = argc - 3;
         withOperand = true;
     }
-   
+
     TQueue<int> que(size);
     Operations operation;
     int operand;
@@ -134,19 +128,17 @@ std::string QueueApplication::operator()(int argc, const char** argv) {
 
         if (!withOperand) {
             operation = parseOperation(argv[argc - 1]);
-        }
-        else {
+        } else {
             operation = parseOperation(argv[argc - 2]);
             operand = parseInt(argv[argc - 1]);
         }
-        
     }
     catch (const std::string& stringException) {
         return stringException;
     }
 
     std::ostringstream stream;
-    
+
     switch (operation) {
     case Operations::push:
         que.Push(operand);
