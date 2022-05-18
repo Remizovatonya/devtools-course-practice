@@ -3,25 +3,18 @@
 #ifndef MODULES_TRUKHANOV_A_QUEUE_INCLUDE_QUEUE_APPLICATION_H_
 #define MODULES_TRUKHANOV_A_QUEUE_INCLUDE_QUEUE_APPLICATION_H_
 
-#include <iostream>
-#include <vector>
-#include <cmath>
 #include "trukhanov_a_queue.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <string.h>
 #include <string>
-#include <sstream>
+#include <vector>
 
 enum class Operations { push, get, length };
 
 class QueueApplication {
-public:
+ public:
     QueueApplication();
     std::string operator()(int argc, const char** argv);
 
-private:
+ private:
     void help(const char* appname, const char* message = "");
     int findOperation(int argc, const char** argv);
     bool validateNumberOfArguments(int argc, const char** argv);
