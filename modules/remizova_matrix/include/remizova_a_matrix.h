@@ -20,12 +20,12 @@ class TMatrix {
     ~TMatrix();
 
     bool operator == (const TMatrix<T>& m) const;
-    bool operator != (const TMatrix<T>& m) const;
+    /*bool operator != (const TMatrix<T>& m) const;*/
     TMatrix<T>& operator = (const TMatrix<T>& m);
     TMatrix<T> operator + (const TMatrix<T>& m);
     TMatrix<T> operator - (const TMatrix<T>& m);
     TMatrix<T> operator * (const TMatrix<T>& m);
-    TMatrix<T> operator / (const TMatrix<T>& m);
+    /*TMatrix<T> operator / (const TMatrix<T>& m);*/
 
     void setMatrix(const std::vector<std::vector<T>>& vec);
     std::vector<std::vector<T>> getMatrix();
@@ -81,18 +81,18 @@ bool TMatrix<T>::operator==(const TMatrix& m) const {
     return true;
 }
 
-template<class T>
-bool TMatrix<T>::operator!=(const TMatrix& m) const {
-    if (rows != m.rows || cols != m.cols)
-        return true;
-    for (size_t i = 0; i < mtr.size(); i++) {
-        for (size_t j = 0; j < mtr[i].size(); j++) {
-            if (mtr[i][j] != m.mtr[i][j])
-                return true;
-        }
-    }
-    return false;
-}
+//template<class T>
+//bool TMatrix<T>::operator!=(const TMatrix& m) const {
+//    if (rows != m.rows || cols != m.cols)
+//        return true;
+//    for (size_t i = 0; i < mtr.size(); i++) {
+//        for (size_t j = 0; j < mtr[i].size(); j++) {
+//            if (mtr[i][j] != m.mtr[i][j])
+//                return true;
+//        }
+//    }
+//    return false;
+//}
 
 template<class T>
 TMatrix<T>& TMatrix<T>::operator=(const TMatrix<T>& m) {
@@ -148,14 +148,14 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& m) {
     return tmp;
 }
 
-template<class T>
-TMatrix<T> TMatrix<T>::operator/(const TMatrix<T>& m) {
-    if (m.cols != m.rows)
-        throw "matrix 2 is not square";
-    TMatrix tmp(rows, m.cols);
-    tmp = *this * m.reverse();
-    return tmp;
-}
+//template<class T>
+//TMatrix<T> TMatrix<T>::operator/(const TMatrix<T>& m) {
+//    if (m.cols != m.rows)
+//        throw "matrix 2 is not square";
+//    TMatrix tmp(rows, m.cols);
+//    tmp = *this * m.reverse();
+//    return tmp;
+//}
 
 template<class T>
 void TMatrix<T>::setMatrix(const std::vector<std::vector<T>>& vec) {
