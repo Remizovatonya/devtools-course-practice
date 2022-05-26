@@ -1,3 +1,5 @@
+// Copyright 2022 Remizova Antonina
+
 #include <gtest/gtest.h>
 #include <vector>
 #include "include/remizova_a_matrix.h"
@@ -197,7 +199,7 @@ TEST(TMatrix, cannot_multiply_matrix_with_different_cols1_rows2) {
     ASSERT_ANY_THROW(m1 * m2);
 }
 
-//TEST(TMatrix, can_divide_matrices_with_square_second_matrix) {
+//  TEST(TMatrix, can_divide_matrices_with_square_second_matrix) {
 //    TMatrix<double> m1(2, 2);
 //    std::vector<std::vector<double>> v1{ {1, 2}, {4, 5} };
 //    m1.setMatrix(v1);
@@ -208,7 +210,7 @@ TEST(TMatrix, cannot_multiply_matrix_with_different_cols1_rows2) {
 //    ASSERT_NO_THROW(m1 / m2);
 //}
 //
-//TEST(TMatrix, cannot_divide_matrices_with_square_second_matrix) {
+//  TEST(TMatrix, cannot_divide_matrices_with_square_second_matrix) {
 //    TMatrix<double> m1(2, 2);
 //    TMatrix<double> m2(2, 4);
 //
