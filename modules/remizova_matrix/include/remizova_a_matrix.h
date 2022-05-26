@@ -26,7 +26,6 @@ class TMatrix {
     TMatrix<T> operator + (const TMatrix<T>& m);
     TMatrix<T> operator - (const TMatrix<T>& m);
     TMatrix<T> operator * (const TMatrix<T>& m);
-    //  TMatrix<T> operator / (const TMatrix<T>& m);
 
     void setMatrix(const std::vector<std::vector<T>>& vec);
     std::vector<std::vector<T>> getMatrix();

@@ -199,24 +199,6 @@ TEST(TMatrix, cannot_multiply_matrix_with_different_cols1_rows2) {
     ASSERT_ANY_THROW(m1 * m2);
 }
 
-//  TEST(TMatrix, can_divide_matrices_with_square_second_matrix) {
-//    TMatrix<double> m1(2, 2);
-//    std::vector<std::vector<double>> v1{ {1, 2}, {4, 5} };
-//    m1.setMatrix(v1);
-//    TMatrix<double> m2(2, 2);
-//    std::vector<std::vector<double>> v2{ {1, 4}, {3, 6} };
-//    m2.setMatrix(v2);
-//
-//    ASSERT_NO_THROW(m1 / m2);
-//}
-//
-//  TEST(TMatrix, cannot_divide_matrices_with_square_second_matrix) {
-//    TMatrix<double> m1(2, 2);
-//    TMatrix<double> m2(2, 4);
-//
-//    ASSERT_ANY_THROW(m1 / m2);
-//}
-
 TEST(TMatrix, can_delete_row_and_col) {
     TMatrix<int> m1(3, 3);
     std::vector<std::vector<int>> v1{ {-2, 3, 4}, {5, 1, -7}, {8, 0, 9} };
