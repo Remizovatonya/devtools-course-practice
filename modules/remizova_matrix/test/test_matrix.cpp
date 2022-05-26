@@ -209,21 +209,15 @@ TEST(TMatrix, can_delete_row_and_col) {
 
     int i = 0, j = 0;
 
-    ASSERT_NO_THROW(m1.matrixWithoutRowAndCol(i, j));
-    m1 = m1.matrixWithoutRowAndCol(i, j);
-
-    EXPECT_EQ(m2, m1);
+    EXPECT_EQ(m2, m1.matrixWithoutRowAndCol(i, j));
 }
 
 TEST(TMatrix, can_find_determinant_square_matrix_1x1) {
     TMatrix<int> m(1, 1, 17);
 
-    int det_1 = 17;
+    int det = 17;
 
-    ASSERT_NO_THROW(m.determinant(m));
-    int det_2 = m.determinant(m);
-
-    EXPECT_EQ(det_1, det_2);
+    EXPECT_EQ(det, m.determinant(m));
 }
 
 TEST(TMatrix, can_find_determinant_square_matrix_2x2) {
@@ -231,12 +225,9 @@ TEST(TMatrix, can_find_determinant_square_matrix_2x2) {
     std::vector<std::vector<int>> v{ {3, -7}, {4, 2} };
     m.setMatrix(v);
 
-    int det_1 = 34;
+    int det = 34;
 
-    ASSERT_NO_THROW(m.determinant(m));
-    int det_2 = m.determinant(m);
-
-    EXPECT_EQ(det_1, det_2);
+    EXPECT_EQ(det, m.determinant(m));
 }
 
 TEST(TMatrix, can_find_determinant_square_matrix_3x3) {
@@ -244,12 +235,9 @@ TEST(TMatrix, can_find_determinant_square_matrix_3x3) {
     std::vector<std::vector<int>> v{ {-2, 3, 4}, {5, 1, -7}, {8, 0, 9} };
     m.setMatrix(v);
 
-    int det_1 = -353;
+    int det = -353;
 
-    ASSERT_NO_THROW(m.determinant(m));
-    int det_2 = m.determinant(m);
-
-    EXPECT_EQ(det_1, det_2);
+    EXPECT_EQ(det, m.determinant(m));
 }
 
 TEST(TMatrix, cannot_find_determinant_not_square_matrix) {
