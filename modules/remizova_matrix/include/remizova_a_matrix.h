@@ -39,18 +39,18 @@ class TMatrix {
 template <class T>
 TMatrix<T>::TMatrix(int _rows, int _cols)
     : rows(_rows), cols(_cols), mtr(_rows, std::vector<T>(_cols)) {
-    if (rows < 0)
+    if (_rows < 0)
         throw "number of cols is less than 0";
-    if (cols < 0)
+    if (_cols < 0)
         throw "number of rows is less than 0";
 }
 
 template <class T>
 TMatrix<T>::TMatrix(int _rows, int _cols, T num)
     : rows(_rows), cols(_cols), mtr(_rows, std::vector<T>(_cols)) {
-    if (rows < 0)
+    if (_rows < 0)
         throw "number of cols is less than 0";
-    if (cols < 0)
+    if (_cols < 0)
         throw "number of rows is less than 0";
     for (size_t i = 0; i < mtr.size(); i++)
         for (size_t j = 0; j < mtr[i].size(); j++)
@@ -147,15 +147,6 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& m) {
         }
     return tmp;
 }
-
-//  template<class T>
-//  TMatrix<T> TMatrix<T>::operator/(const TMatrix<T>& m) {
-//    if (m.cols != m.rows)
-//        throw "matrix 2 is not square";
-//    TMatrix tmp(rows, m.cols);
-//    tmp = *this * m.reverse();
-//    return tmp;
-//  }
 
 template<class T>
 void TMatrix<T>::setMatrix(const std::vector<std::vector<T>>& vec) {

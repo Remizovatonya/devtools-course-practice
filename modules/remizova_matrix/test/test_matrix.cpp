@@ -208,6 +208,8 @@ TEST(TMatrix, can_delete_row_and_col) {
     m2.setMatrix(v2);
 
     int i = 0, j = 0;
+
+    ASSERT_NO_THROW(m1.matrixWithoutRowAndCol(i, j));
     m1 = m1.matrixWithoutRowAndCol(i, j);
 
     EXPECT_EQ(m2, m1);
@@ -217,6 +219,8 @@ TEST(TMatrix, can_find_determinant_square_matrix_1x1) {
     TMatrix<int> m(1, 1, 17);
 
     int det_1 = 17;
+
+    ASSERT_NO_THROW(m.determinant(m));
     int det_2 = m.determinant(m);
 
     EXPECT_EQ(det_1, det_2);
@@ -228,6 +232,8 @@ TEST(TMatrix, can_find_determinant_square_matrix_2x2) {
     m.setMatrix(v);
 
     int det_1 = 34;
+
+    ASSERT_NO_THROW(m.determinant(m));
     int det_2 = m.determinant(m);
 
     EXPECT_EQ(det_1, det_2);
@@ -239,6 +245,8 @@ TEST(TMatrix, can_find_determinant_square_matrix_3x3) {
     m.setMatrix(v);
 
     int det_1 = -353;
+
+    ASSERT_NO_THROW(m.determinant(m));
     int det_2 = m.determinant(m);
 
     EXPECT_EQ(det_1, det_2);
