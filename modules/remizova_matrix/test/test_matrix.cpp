@@ -1,15 +1,9 @@
-// Copyright 2022 Remizova Antonina
-
 #include <gtest/gtest.h>
 #include <vector>
 #include "include/remizova_a_matrix.h"
 
 TEST(TMatrix, can_create_int_null_matrix_with_positive_size) {
     ASSERT_NO_THROW(TMatrix<int> m(3, 4));
-}
-
-TEST(TMatrix, can_create_double_null_matrix_with_positive_size) {
-    ASSERT_NO_THROW(TMatrix<double> m(3, 4));
 }
 
 TEST(TMatrix, cannot_create_null_matrix_with_negative_rows) {
@@ -24,24 +18,12 @@ TEST(TMatrix, can_create_int_matrix_with_given_value) {
     ASSERT_NO_THROW(TMatrix<int> m(3, 3, 5));
 }
 
-TEST(TMatrix, can_create_int_matrix_with_negative_given_value) {
-    ASSERT_NO_THROW(TMatrix<int> m(3, 3, -5));
-}
-
 TEST(TMatrix, cannot_create_given_matrix_with_negative_rows) {
     ASSERT_ANY_THROW(TMatrix<int> m(-4, 2, 1));
 }
 
 TEST(TMatrix, cannot_create_given_matrix_with_negative_cols) {
     ASSERT_ANY_THROW(TMatrix<int> m(4, -2, 1));
-}
-
-TEST(TMatrix, can_create_double_matrix_with_given_value) {
-    ASSERT_NO_THROW(TMatrix<double> m(3, 3, 6.1));
-}
-
-TEST(TMatrix, can_create_bool_matrix_with_given_value) {
-    ASSERT_NO_THROW(TMatrix<bool> m(3, 3, false));
 }
 
 TEST(TMatrix, can_create_copied_int_matrix) {
@@ -58,9 +40,16 @@ TEST(TMatrix, can_set_and_get_matrix) {
     EXPECT_EQ(m.getMatrix(), v);;
 }
 
-TEST(TMatrix, cannot_set_matrix_with_different_size) {
+TEST(TMatrix, cannot_set_matrix_with_different_vec_rows) {
     TMatrix<int> m(2, 2);
     std::vector<std::vector<int>> v{ {-2, 3}, {8, 0}, {-4, -1} };
+
+    ASSERT_ANY_THROW(m.setMatrix(v));
+}
+
+TEST(TMatrix, cannot_set_matrix_with_different_vec_cols) {
+    TMatrix<int> m(2, 2);
+    std::vector<std::vector<int>> v{ {-2, 3, 8}, { 0, -4, -1 } };
 
     ASSERT_ANY_THROW(m.setMatrix(v));
 }
@@ -74,9 +63,16 @@ TEST(TMatrix, can_compare_identical_matrices) {
     EXPECT_EQ(true, m1 == m2);
 }
 
-TEST(TMatrix, can_compare_matrices_with_same_elem_dif_size) {
+TEST(TMatrix, can_compare_matrices_with_same_elem_dif_row) {
     TMatrix<int> m1(2, 2, 4);
-    TMatrix<int> m2(3, 3, 4);
+    TMatrix<int> m2(3, 2, 4);
+
+    EXPECT_EQ(false, m1 == m2);
+}
+
+TEST(TMatrix, can_compare_matrices_with_same_elem_dif_cols) {
+    TMatrix<int> m1(2, 2, 4);
+    TMatrix<int> m2(2, 3, 4);
 
     EXPECT_EQ(false, m1 == m2);
 }
@@ -88,20 +84,25 @@ TEST(TMatrix, can_compare_matrices_with_same_size_dif_elem) {
     EXPECT_EQ(false, m1 == m2);
 }
 
-TEST(TMatrix, can_non_compare_different_matrices) {
+TEST(TMatrix, can_non_compare_identical_matrices) {
     TMatrix<int> m1(2, 2);
     std::vector<std::vector<int>> v1{ {-2, 3}, {8, 0} };
     m1.setMatrix(v1);
-    TMatrix<int> m2(2, 2);
-    std::vector<std::vector<int>> v2{ {1, 7}, {-4, 5} };
-    m2.setMatrix(v2);
+    TMatrix<int> m2(m1);
+
+    EXPECT_EQ(false, m1 != m2);
+}
+
+TEST(TMatrix, can_non_compare_matrices_with_same_elem_dif_rows) {
+    TMatrix<int> m1(2, 2, 4);
+    TMatrix<int> m2(3, 2, 4);
 
     EXPECT_EQ(true, m1 != m2);
 }
 
-TEST(TMatrix, can_non_compare_matrices_with_same_elem_dif_size) {
+TEST(TMatrix, can_non_compare_matrices_with_same_elem_dif_cols) {
     TMatrix<int> m1(2, 2, 4);
-    TMatrix<int> m2(3, 3, 4);
+    TMatrix<int> m2(2, 3, 4);
 
     EXPECT_EQ(true, m1 != m2);
 }
@@ -120,16 +121,22 @@ TEST(TMatrix, can_assign_matrix_with_same_size) {
     ASSERT_NO_THROW(m1 = m2);
 }
 
-TEST(TMatrix, can_assign_equl_matrix) {
+TEST(TMatrix, can_assign_equal_matrix) {
     TMatrix<int> m1(2, 2, 5);
-    TMatrix<int> m2(2, 2, 5);
+
+    ASSERT_NO_THROW(m1 = m1);
+}
+
+TEST(TMatrix, can_assign_matrix_with_different_rows) {
+    TMatrix<int> m1(2, 2, 5);
+    TMatrix<int> m2(3, 2, 3);
 
     ASSERT_NO_THROW(m1 = m2);
 }
 
-TEST(TMatrix, can_assign_matrix_with_different_size) {
+TEST(TMatrix, can_assign_matrix_with_different_cols) {
     TMatrix<int> m1(2, 2, 5);
-    TMatrix<int> m2(3, 3, 3);
+    TMatrix<int> m2(2, 3, 3);
 
     ASSERT_NO_THROW(m1 = m2);
 }
@@ -141,9 +148,16 @@ TEST(TMatrix, can_compare_matrix_with_same_size) {
     ASSERT_NO_THROW(m1 + m2);
 }
 
-TEST(TMatrix, cannot_compare_matrix_with_different_size) {
+TEST(TMatrix, cannot_compare_matrix_with_different_rows) {
     TMatrix<int> m1(2, 2, 5);
     TMatrix<int> m2(4, 2, 3);
+
+    ASSERT_ANY_THROW(m1 + m2);
+}
+
+TEST(TMatrix, cannot_compare_matrix_with_different_cols) {
+    TMatrix<int> m1(2, 2, 5);
+    TMatrix<int> m2(2, 4, 3);
 
     ASSERT_ANY_THROW(m1 + m2);
 }
@@ -155,9 +169,16 @@ TEST(TMatrix, can_substract_matrix_with_same_size) {
     ASSERT_NO_THROW(m1 - m2);
 }
 
-TEST(TMatrix, cannot_substract_matrix_with_different_size) {
+TEST(TMatrix, cannot_substract_matrix_with_different_rows) {
     TMatrix<int> m1(2, 2, 5);
     TMatrix<int> m2(4, 2, 3);
+
+    ASSERT_ANY_THROW(m1 - m2);
+}
+
+TEST(TMatrix, cannot_substract_matrix_with_different_cols) {
+    TMatrix<int> m1(2, 2, 5);
+    TMatrix<int> m2(2, 4, 3);
 
     ASSERT_ANY_THROW(m1 - m2);
 }
@@ -176,23 +197,23 @@ TEST(TMatrix, cannot_multiply_matrix_with_different_cols1_rows2) {
     ASSERT_ANY_THROW(m1 * m2);
 }
 
-TEST(TMatrix, can_divide_matrices_with_square_second_matrix) {
-    TMatrix<double> m1(2, 2);
-    std::vector<std::vector<double>> v1{ {1, 2}, {4, 5} };
-    m1.setMatrix(v1);
-    TMatrix<double> m2(2, 2);
-    std::vector<std::vector<double>> v2{ {1, 4}, {3, 6} };
-    m2.setMatrix(v2);
-
-    ASSERT_NO_THROW(m1 / m2);
-}
-
-TEST(TMatrix, cannot_divide_matrices_with_square_second_matrix) {
-    TMatrix<double> m1(2, 2);
-    TMatrix<double> m2(2, 4);
-
-    ASSERT_ANY_THROW(m1 / m2);
-}
+//TEST(TMatrix, can_divide_matrices_with_square_second_matrix) {
+//    TMatrix<double> m1(2, 2);
+//    std::vector<std::vector<double>> v1{ {1, 2}, {4, 5} };
+//    m1.setMatrix(v1);
+//    TMatrix<double> m2(2, 2);
+//    std::vector<std::vector<double>> v2{ {1, 4}, {3, 6} };
+//    m2.setMatrix(v2);
+//
+//    ASSERT_NO_THROW(m1 / m2);
+//}
+//
+//TEST(TMatrix, cannot_divide_matrices_with_square_second_matrix) {
+//    TMatrix<double> m1(2, 2);
+//    TMatrix<double> m2(2, 4);
+//
+//    ASSERT_ANY_THROW(m1 / m2);
+//}
 
 TEST(TMatrix, can_delete_row_and_col) {
     TMatrix<int> m1(3, 3);
@@ -295,5 +316,3 @@ TEST(TMatrix, cannot_find_reverse_matrix_with_null_determinant) {
 
     ASSERT_ANY_THROW(m.reverse());
 }
-
-

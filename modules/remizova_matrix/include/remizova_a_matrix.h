@@ -14,7 +14,7 @@ class TMatrix {
     int cols;
     std::vector<std::vector<T> > mtr;
 
- public:
+public:
     TMatrix(int _rows, int _cols);
     TMatrix(int _rows, int _cols, T num);
     TMatrix(const TMatrix<T>& m);
@@ -149,14 +149,14 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& m) {
     return tmp;
 }
 
-template<class T>
-TMatrix<T> TMatrix<T>::operator/(const TMatrix<T>& m) {
-    if (m.cols != m.rows)
-        throw "matrix 2 is not square";
-    TMatrix tmp(rows, m.cols);
-    tmp = *this * m.reverse();
-    return tmp;
-}
+//template<class T>
+//TMatrix<T> TMatrix<T>::operator/(const TMatrix<T>& m) {
+//    if (m.cols != m.rows)
+//        throw "matrix 2 is not square";
+//    TMatrix tmp(rows, m.cols);
+//    tmp = *this * m.reverse();
+//    return tmp;
+//}
 
 template<class T>
 void TMatrix<T>::setMatrix(const std::vector<std::vector<T>>& vec) {
